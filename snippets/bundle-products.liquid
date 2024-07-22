@@ -1,0 +1,70 @@
+{% assign bundle_products = product.metafields.custom.bundle_products %}
+{% if bundle_products %}
+<div class="bundle_products">
+  <h3>Bundle Products</h3>
+  <div class="bundle-items-container">
+    {% for bundle in bundle_products %}
+    {% assign bundle_product = all_products[bundle] %}
+    <div class="bundle-item" data-id="{{ bundle_product.variants.first.id }}">
+      <img src="{{ bundle_product | img_url: 'medium' }}" alt="{{ bundle_product.title }}" />
+      <p>{{ bundle_product.title }}</p>
+    </div>
+    {% endfor %}
+  </div>
+  <button class="product-form__cart-submit">Add Bundle to Cart</button>
+</div>
+{% endif %}
+
+
+
+<style>
+  .bundle_products {
+  margin-top: 20px;
+}
+
+.bundle-items-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.bundle-item {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.bundle-item img {
+  max-width: 100px;
+  height: auto;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.bundle-item p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.bundle-item.active {
+  background-color: #f8f8f8;
+  border-color: #000;
+}
+
+.product-form__cart-submit {
+  display: block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.product-form__cart-submit:hover {
+  background-color: #333;
+}
+
+</style>
